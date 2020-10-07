@@ -1,0 +1,119 @@
+@media (min-width: 500px) and (max-width: 800px)
+{
+    body{
+    background-image: url("imagem1.png");
+    background-position: relative;
+    }
+}
+
+@media (min-width: 800px)
+{
+    /*body
+    {
+        background-color: #ffffff;
+        min-height: 100%;
+        min-width: 1024px;
+        max-width:100%;
+        height:auto;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-image: url("fundo.jpg");
+        background-repeat: no-repeat;
+    }*/
+
+    #fundo
+    {
+        position: fixed; 
+        top: -50%; 
+        left: -50%; 
+        width: 200%; 
+        height: 200%;
+    }
+
+    #fundo img
+    {
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0; 
+        margin: auto; 
+        min-width: 50%;
+        min-height: 50%;
+    }
+
+    .cpa
+    {
+        width: 250px;
+        height: 152px;
+        margin-top: 40px;
+    }
+
+    div.wrapper
+    {  
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -350px;
+        margin-left: -200px;
+        text-align: center;
+        width:400px;
+        height:700px;
+        background: rgb(0,172,141);
+        background: -moz-linear-gradient(0deg, rgba(0,172,141,1) 17%, rgba(9,68,182,1) 100%);
+        background: -webkit-linear-gradient(0deg, rgba(0,172,141,1) 17%, rgba(9,68,182,1) 100%);
+        background: linear-gradient(0deg, rgba(0,172,141,1) 17%, rgba(9,68,182,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00ac8d",endColorstr="#0944b6",GradientType=1);
+        border-radius: 25px;
+    }
+
+    div.insert
+    {
+        font-family: 'tajawal', sans-serif;
+        font-size: 16px;
+        padding-top: 25px;
+    }
+
+    input.botão
+    {
+        background-color: #00ac8d;
+        border: none;
+        color: white;
+        height: 35px;
+        width: 170px;
+        border-radius: 4px;
+        font-size: 17px;
+        /*float: right;
+        margin-right: 165px;
+        margin-top: 6px;*/
+    }
+
+    input.caixa
+    {
+        height: 40px;
+        width: 300px;
+        border: 2px solid #00ac8d;
+        border-radius: 4px;
+        color: white;
+        background-color: transparent;
+    }
+
+    input.caixa::placeholder
+    {
+        color:white;
+    }
+
+
+    a.recuperacao
+    {
+        font-size:16px;
+        color: white;
+    }
+
+    h1{
+        font-size: 45px;
+        font-weight: bold;
+        color: white;
+    }
+}
