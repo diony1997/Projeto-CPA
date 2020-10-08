@@ -29,6 +29,9 @@
             }
         </script>
         <?php
+        require_once 'banco.php';
+        $banco = new Banco();
+        $banco->buscarPergunta("mmm");
         session_start();
         if (isset($_SESSION['message'])) {
             print $_SESSION['message'];
