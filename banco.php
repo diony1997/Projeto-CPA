@@ -44,8 +44,36 @@ class Banco {
         }
     }
 
-    function inserirPergunta() {
-        
+    function inserirPergunta($id, $pergunta, $materia) {
+        $sql = "INSERT INTO `perguntas` (`id`, `pergunta`, `materia`) VALUES ('" . $id . "','" . $pergunta . "','" . $materia . "')";
+        $stmt = mysqli_prepare($this->linkDB->con, $sql);
+        if (!$stmt) {
+            die("Falha no comando SQL");
+        }
+        $stmt->execute();
+    }
+
+    function apagarPergunta($id) {
+        $sql = "DELETE FROM `perguntas` WHERE `perguntas`.`id` = " . $id;
+        $stmt = mysqli_prepare($this->linkDB->con, $sql);
+        if (!$stmt) {
+            die("Falha no comando SQL");
+        }
+        $stmt->execute();
+    }
+
+    function alterarSenha($ra, $senhaOld, $senhaNew) {
+        if (login($ra, $senhaOld)) {
+            //senha antiga igual
+            //Implementar
+        } else {
+            $sql = "UPDATE `aluno` SET `Password` = '" . $senhaNew . "' WHERE `aluno`.`RA` = '" . $ra . "'";
+            $stmt = mysqli_prepare($this->linkDB->con, $sql);
+            if (!$stmt) {
+                die("Falha no comando SQL");
+            }
+            $stmt->execute();
+        }
     }
 
     function buscarPergunta($materia) {
@@ -57,8 +85,8 @@ class Banco {
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()){
-                echo "Pergunta: ".$row["pergunta"]."<br>";
+            while ($row = $result->fetch_assoc()) {
+                echo "Pergunta: " . $row["pergunta"] . "<br>";
             }
         } else {
             echo "Não ha perguntas";

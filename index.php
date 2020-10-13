@@ -29,14 +29,26 @@
             }
         </script>
         <?php
+        
         require_once 'banco.php';
         $banco = new Banco();
-        $banco->buscarPergunta("mmm");
+        /*
+        $banco->apagarPergunta(3);
+         * 
+         */
+        /*
+        Exemplo inserir pergunta
+        $banco->inserirPergunta(5, "Pergunta teste", "mat3");
+         * 
+         */
+        /* Exemplo buscar pergunta
+         * $banco->buscarPergunta("mmm");
         session_start();
         if (isset($_SESSION['message'])) {
             print $_SESSION['message'];
             $_SESSION['message'] = null;
         }
+         */
         ?>
 
     </body>
