@@ -31,19 +31,17 @@
 
                 <?php
                 require_once 'banco.php';
+                session_start();
+                if ((isset($_SESSION['ra']) == true) and ( isset($_SESSION['senha']) == true)) {
+                    header('location:index.php');
+                }
+
                 $banco = new Banco();
 
                 $ra = $_POST['user'];
                 $senha = $_POST['senha'];
                 if ($banco->checarRA($ra)) {
-                    if ($banco->login($ra, $senha)) {
-                        echo 'senha valida';
-                    } else {
-                        //redireciona para outra pagina
-                        session_start();
-                        $_SESSION['message'] = "<script>alert('Senha Inválida');</script>";
-                        header("Location: login.php?");
-                    }
+                    $banco->login($ra, $senha);
                 } else {
                     echo 'Usuario invalido';
                 }

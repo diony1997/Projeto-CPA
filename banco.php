@@ -21,10 +21,16 @@ class Banco {
         $stmt->store_result();
         //$result = $this->linkDB->con->query($sql);
 
+        session_start();
         if ($stmt->num_rows != 0) {
-            return true;
+            $_SESSION['ra'] = $ra;
+            $_SESSION['senha'] = $senha;
+            header('location: index.php');
         } else {
-            return false;
+            unset ($_SESSION['ra']);
+            unset ($_SESSION['senha']);
+            $_SESSION['message'] = "<script>alert('Senha Inválida');</script>";
+            header("Location: login.php?");
         }
     }
 
