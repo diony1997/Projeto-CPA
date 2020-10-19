@@ -1,5 +1,4 @@
 <?php
-
 require_once 'banco.php';
 session_start();
 if (!(isset($_SESSION['ra']) == true) and ( isset($_SESSION['senha']) == true)) {
@@ -13,8 +12,14 @@ $idpergunta1 = filter_input(INPUT_POST, 'idfb1');
 $resposta2 = filter_input(INPUT_POST, 'fb2');
 $idpergunta2 = filter_input(INPUT_POST, 'idfb2');
 
-echo "<br>Resposta id = ".$idpergunta1." = ".$resposta1."</br>";
-echo "<br>Resposta id = ".$idpergunta2." = ".$resposta2."</br>";
-
+if ($resposta1 > 0) {
+    $banco->inserirResposta($resposta1, $idpergunta1);
+}
+if ($resposta2 > 0) {
+    $banco->inserirResposta($resposta2, $idpergunta2);
+}
+$banco->gerarRelacao();
+$_SESSION['checar'] = FALSE;
+header('location:paginaPerguntas2.php');
 
 ?>

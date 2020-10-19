@@ -12,15 +12,12 @@ class Banco {
 
     function login($ra, $senha) {
         $sql = "SELECT * FROM `aluno` WHERE RA = '" . $ra . "' && senha = '" . $senha . "'";
-
         $stmt = mysqli_prepare($this->linkDB->con, $sql);
         if (!$stmt) {
             die("Falha no comando SQL");
         }
         $stmt->execute();
         $stmt->store_result();
-        //$result = $this->linkDB->con->query($sql);
-
         session_start();
         if ($stmt->num_rows != 0) {
             $_SESSION['ra'] = $ra;
@@ -50,8 +47,8 @@ class Banco {
             return false;
         }
     }
-    
-    function buscarBloco(){
+
+    function buscarBloco() {
         $sql = "SELECT bloco FROM `aluno` WHERE ra = '" . $_SESSION['ra'] . "'";
         $stmt = mysqli_prepare($this->linkDB->con, $sql);
         if (!$stmt) {
@@ -72,10 +69,6 @@ class Banco {
         $stmt->execute();
     }
 
-    function inserirResposta($valor, $idpergunta){
-        //fazer update ou criar uma tabela resposta caso não exista
-    } 
-    
     function alterarSenha($ra, $senhaOld, $senhaNew) {
         if (login($ra, $senhaOld)) {
             //senha antiga igual
@@ -92,8 +85,7 @@ class Banco {
 
     function buscarDisciplina() {
         //buscar o curso pelo ra
-        $ra = $_SESSION['ra'];
-        $sql = "SELECT idcurso FROM `aluno` WHERE ra = '" . $ra . "'";
+        $sql = "SELECT idcurso FROM `aluno` WHERE ra = '" . $_SESSION['ra'] . "'";
         $stmt = mysqli_prepare($this->linkDB->con, $sql);
         if (!$stmt) {
             die("Falha no comando SQL");
@@ -117,18 +109,18 @@ class Banco {
                 $saida .= $row["id"] . ";";
             }
         } else {
-            header('location:fim.html');
+            header('location:fim.php');
         }
         $disciplina = explode(";", $saida);
         unset($disciplina[sizeof($disciplina) - 1]);
         $disciplina = array_values($disciplina);
-        $this->conferirJafeito($disciplina, $ra);
+        $this->conferirJafeito($disciplina);
     }
 
     //confere se ja se o aluno ja respondeu as perguntas
-    function conferirJafeito($disciplina, $ra) {
+    function conferirJafeito($disciplina) {
         for ($x = 0; $x < sizeof($disciplina); $x++) {
-            $sql = "SELECT * FROM `aluno_resp` WHERE alunora = '" . $ra . "' and iddisciplina = '" . $disciplina[$x] . "'";
+            $sql = "SELECT * FROM `aluno_resp` WHERE alunora = '" . $_SESSION['ra'] . "' and iddisciplina = '" . $disciplina[$x] . "'";
             $stmt = mysqli_prepare($this->linkDB->con, $sql);
             if (!$stmt) {
                 die("Falha no comando SQL");
@@ -142,12 +134,13 @@ class Banco {
             }
         }
         $_SESSION['disciplina'] = $disciplina;
+        $_SESSION['checar'] = TRUE;
     }
 
     function buscarPergunta() {
         $disciplina = $_SESSION['disciplina'];
         if (empty($disciplina)) {
-            header('location:fim.html');
+            header('location:fim.php');
         } else {
             $sql = "SELECT id,conteudo FROM `pergunta` WHERE iddisciplina = '" . $disciplina[0] . "'";
             $stmt = mysqli_prepare($this->linkDB->con, $sql);
@@ -162,12 +155,76 @@ class Banco {
                     $saida .= $row["id"] . "#" . $row["conteudo"] . ";";
                 }
             }
+
+            $_SESSION['atual'] = $disciplina[0];
+            if ($_SESSION['checar'] == FALSE) {
+                $_SESSION['checar'] = TRUE; //variavel para checar o formulario foi enviado ou não
+                unset($disciplina[0]);
+                $disciplina = array_values($disciplina);
+                $_SESSION['disciplina'] = $disciplina;
+            }
+            return $saida;
         }
-        $_SESSION['atual'] = $disciplina[0];
-        unset($disciplina[0]);
-        $disciplina = array_values($disciplina);
-        $_SESSION['disciplina'] = $disciplina;
-        return $saida;
+    }
+
+    function inserirResposta($valor, $idpergunta) {
+        $this->checarTabelaResp($idpergunta);
+        $sql = "UPDATE `resposta` SET `valor` = (valor + " . $valor . "), `cont` = (cont + 1) WHERE `resposta`.`bloco` = '" . $_SESSION['bloco'] . "' AND `resposta`.`idpergunta` = '" . $idpergunta . "' AND `resposta`.`iddisciplina` = '" . $_SESSION['atual'] . "'";
+        $stmt = mysqli_prepare($this->linkDB->con, $sql);
+        if (!$stmt) {
+            die("Falha no comando SQL");
+        }
+        $stmt->execute();
+    }
+
+    //gerar uma relação entre o ra e a disciplina para sinalizar que o aluno ja respondeu
+    function gerarRelacao() {
+        $sql = "INSERT INTO `aluno_resp` (`alunora`, `iddisciplina`) VALUES ('" . $_SESSION['ra'] . "', '" . $_SESSION['atual'] . "')";
+        $stmt = mysqli_prepare($this->linkDB->con, $sql);
+        if (!$stmt) {
+            die("Falha no comando SQL");
+        }
+        $stmt->execute();
+    }
+
+    function gerarRelatorio($bloco) {
+        $sql = "SELECT disciplina.nome as Discplina, pergunta.conteudo as Pergunta, (resposta.valor/resposta.cont) as Media ,resposta.cont as QTD_Respostas from disciplina\n"
+                . "inner JOIN pergunta on disciplina.id = pergunta.iddisciplina\n"
+                . "INNER JOIN resposta on resposta.idpergunta = pergunta.id\n"
+                . "where bloco = '" . $bloco . "'";
+        $stmt = mysqli_prepare($this->linkDB->con, $sql);
+        if (!$stmt) {
+            die("Falha no comando SQL");
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $saida = "";
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<br>" . print_r($row) . "</br>";
+            }
+        } else {
+            echo 'Bloco invalido';
+        }
+    }
+
+    //função para conferir se existe a tabela de resposta
+    function checarTabelaResp($idpergunta) {
+        $sql = "SELECT * FROM `resposta` WHERE bloco = '" . $_SESSION['bloco'] . "' && idpergunta = '" . $idpergunta . "' && iddisciplina = '" . $_SESSION['atual'] . "'";
+        $stmt = mysqli_prepare($this->linkDB->con, $sql);
+        if (!$stmt) {
+            die("Falha no comando SQL");
+        }
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows < 1) {
+            $sql = "INSERT INTO `resposta` (`bloco`, `idpergunta`, `iddisciplina`) VALUES ('" . $_SESSION['bloco'] . "','" . $idpergunta . "','" . $_SESSION['atual'] . "')";
+            $stmt = mysqli_prepare($this->linkDB->con, $sql);
+            if (!$stmt) {
+                die("Falha no comando SQL");
+            }
+            $stmt->execute();
+        }
     }
 
     function __destruct() {

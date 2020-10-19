@@ -63,8 +63,16 @@
         </div>
         <?php
         session_start();
+        
         require_once 'banco.php';
         $banco = new Banco();
+        /*
+         * chama duas vezes(solução provisoria para atualizar o vetor de disciplina)
+         * inseri um if para checar se é a primeira vez que executa mas mesmo assim não funciona
+         * se retirar o if caso algum atualize a pagina vai marcar como feito e se não chamar
+         * duas vezes o usuario tem que da f5 para mostrar as perguntas corretas
+         */
+        $banco->buscarPergunta();
         $saida = $banco->buscarPergunta();
         ?>
         <script>
@@ -75,11 +83,10 @@
                 //cada interação do for é uma pergunta
                 for (var i = 0; i < pergunta.length - 1; i++) {
                     var conteudo = pergunta[i].split("#");
-                    document.getElementById("id"+i).value = conteudo[0];
+                    document.getElementById("id" + i).value = conteudo[0];
                     document.getElementById("pergunta" + i).innerHTML = conteudo[1];
                 }
             }
-
         </script>
     </body>
 </html>

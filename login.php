@@ -34,7 +34,7 @@
                         <br/>
                         <input class="caixa" type="text" name="user" placeholder="RA">
                         <br/><br/>        
-                        <input class="caixa" type="text" name="senha" placeholder="Senha">
+                        <input class="caixa" type="password" name="senha" placeholder="Senha">
                         <br/><br/>
                         <input class="botão" type="submit" value="Login">
                         <br/><br/>

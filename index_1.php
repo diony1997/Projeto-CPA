@@ -21,15 +21,17 @@
 
 
         <button onclick="pergunta()"></button>
-<h1 id="message0">Hello World!</h1>
-<h1 id="message1">Hello World!</h1>
+        <h1 id="message0">Hello World!</h1>
+        <h1 id="message1">Hello World!</h1>
 
 
         <?php
         session_start();
         require_once 'banco.php';
         $banco = new Banco();
-        $saida = $banco->buscarPergunta();
+        
+
+        //$saida = $banco->buscarPergunta();
         ?>
 
         <script src = "qrcode.min.js" ></script>
@@ -49,7 +51,7 @@
                 var pergunta = perguntas.split(";");
                 //cada interação do for é uma pergunta
                 for (var i = 0; i < pergunta.length - 1; i++) {
-                    document.getElementById("message"+i).innerHTML = pergunta[i];
+                    document.getElementById("message" + i).innerHTML = pergunta[i];
                 }
             }
 
