@@ -33,13 +33,14 @@
                 require_once 'banco.php';
                 session_start();
                 if ((isset($_SESSION['ra']) == true) and ( isset($_SESSION['senha']) == true)) {
-                    header('location:index.php');
+                    header('location:paginaPerguntas2.php');
                 }
 
                 $banco = new Banco();
 
-                $ra = $_POST['user'];
-                $senha = $_POST['senha'];
+                $ra = filter_input(INPUT_POST, 'user');
+                $senha = filter_input(INPUT_POST, 'senha');
+
                 if ($banco->checarRA($ra)) {
                     $banco->login($ra, $senha);
                 } else {

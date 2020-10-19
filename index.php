@@ -17,17 +17,14 @@
         <input type="submit" value="Gerar QRCode" onclick="gerarQR()"/><br>
         <div id="qrcode"></div>
 
+        <input type="button" onclick="buscarPerguntas()"/>
 
-        <script src = "qrcode.min.js"></script>
 
-        <script>
-            var url = document.getElementById('novaURL');
-            var qrcode = new QRCode(document.getElementById('qrcode'));
 
-            function gerarQR() {
-                qrcode.makeCode(url.value);
-            }
-        </script>
+
+        <p id="message"></p>
+
+
         <?php
         require_once 'banco.php';
         $banco = new Banco();
@@ -35,6 +32,9 @@
         if (!(isset($_SESSION['ra']) == true) and ( !isset($_SESSION['senha']) == true)) {
             header('location: login.php');
         }
+        $saida = $banco->buscarPergunta("mat1");
+
+
         /*
           $banco->apagarPergunta(3);
          * 
@@ -53,6 +53,34 @@
           }
          */
         ?>
+
+        <script src = "qrcode.min.js" ></script>
+
+        <script>
+            var url = document.getElementById('novaURL');
+            var qrcode = new QRCode(document.getElementById('qrcode'));
+            function gerarQR() {
+                qrcode.makeCode(url.value);
+            }
+            function escrever() {
+                document.getElementById("message").innerHTML = "your text here";
+            }
+
+            function buscarPerguntas() {
+                var perguntas = <?php echo json_encode($saida); ?>;
+                if (perguntas === "") {
+                    document.getElementById("message").innerHTML = "Não há perguntas";
+                } else {
+                    var pergunta = perguntas.split(";");
+                    //cada interação do for é uma pergunta
+                    for (var i = 0; i < pergunta.length - 1; i++) {
+                        document.getElementById("message").innerHTML = pergunta[i];
+                    }
+                }
+            }
+
+        </script>
+
 
     </body>
 </html>
