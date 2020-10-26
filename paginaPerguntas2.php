@@ -1,3 +1,17 @@
+<?php
+        session_start();
+
+        require_once 'banco.php';
+        $banco = new Banco();
+        /*
+         * chama duas vezes(solução provisoria para atualizar o vetor de disciplina)
+         * inseri um if para checar se é a primeira vez que executa mas mesmo assim não funciona
+         * se retirar o if caso algum atualize a pagina vai marcar como feito e se não chamar
+         * duas vezes o usuario tem que da f5 para mostrar as perguntas corretas
+         */
+        $banco->exibirPergunta();
+        $saida = $banco->exibirPergunta();
+        ?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -22,11 +36,10 @@
         <div class="pergunta">
             <form action="paginaPergunta2_resp.php" method="post">
                 <h2 id="pergunta0" class="pergunta">Sua experiência de aprendizagem nas aulas remotas (ao vivo)</h2>
-
                 <div class="estrelas">
-                    <input type="radio" id="cm_star-empty" name="fb" value="" checked/>
+                    <input type="radio" id="cm_star-empty" name="fb" value="" />
                     <label for="cm_star-1"><i class="fa"></i></label>
-                    <input type="radio" id="cm_star-1" name="fb" value="1"/>
+                    <input type="radio" id="cm_star-1" name="fb" value="1" checked/>
                     <label for="cm_star-2"><i class="fa"></i></label>
                     <input type="radio" id="cm_star-2" name="fb" value="2"/>
                     <label for="cm_star-3"><i class="fa"></i></label>
@@ -39,11 +52,10 @@
                 </div>
 
                 <h2 id="pergunta1" class="pergunta">Desempenho geral do professor</h2>
-
-                <div class="estrelas">
-                    <input type="radio" id="cm_star-empty" name="fb2" value="" checked/>
+                <div id = "divP2" class="estrelas">
+                    <input type="radio" id="cm_star-empty" name="fb2" value=""/>
                     <label for="cm_star-6"><i class="fa"></i></label>
-                    <input type="radio" id="cm_star-6" name="fb2" value="1"/>
+                    <input type="radio" id="cm_star-6" name="fb2" value="1" checked/>
                     <label for="cm_star-7"><i class="fa"></i></label>
                     <input type="radio" id="cm_star-7" name="fb2" value="2"/>
                     <label for="cm_star-8"><i class="fa"></i></label>
@@ -54,6 +66,55 @@
                     <input type="radio" id="cm_star-10" name="fb2" value="5"/>
                     <input type="hidden" id="id1" name="idfb2" value="0">
                 </div>
+                
+                <h2 id="pergunta2" class="pergunta">Desempenho geral do professor</h2>
+                <div id = "divP3" class="estrelas">
+                    <input type="radio" id="cm_star-empty" name="fb3" value=""/>
+                    <label for="cm_star-6"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-6" name="fb3" value="1" checked/>
+                    <label for="cm_star-7"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-7" name="fb3" value="2"/>
+                    <label for="cm_star-8"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-8" name="fb3" value="3"/>
+                    <label for="cm_star-9"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-9" name="fb3" value="4"/>
+                    <label for="cm_star-10"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-10" name="fb3" value="5"/>
+                    <input type="hidden" id="id2" name="idfb3" value="0">
+                </div>
+                
+                <h2 id="pergunta3" class="pergunta">Desempenho geral do professor</h2>
+                <div id = "divP4" class="estrelas">
+                    <input type="radio" id="cm_star-empty" name="fb4" value=""/>
+                    <label for="cm_star-6"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-6" name="fb4" value="1" checked/>
+                    <label for="cm_star-7"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-7" name="fb4" value="2"/>
+                    <label for="cm_star-8"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-8" name="fb4" value="3"/>
+                    <label for="cm_star-9"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-9" name="fb4" value="4"/>
+                    <label for="cm_star-10"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-10" name="fb4" value="5"/>
+                    <input type="hidden" id="id3" name="idfb4" value="0">
+                </div>
+                
+                <h2 id="pergunta4" class="pergunta">Desempenho geral do professor</h2>
+                <div id = "divP5" class="estrelas">
+                    <input type="radio" id="cm_star-empty" name="fb5" value=""/>
+                    <label for="cm_star-6"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-6" name="fb5" value="1" checked/>
+                    <label for="cm_star-7"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-7" name="fb5" value="2"/>
+                    <label for="cm_star-8"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-8" name="fb5" value="3"/>
+                    <label for="cm_star-9"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-9" name="fb5" value="4"/>
+                    <label for="cm_star-10"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-10" name="fb5" value="5"/>
+                    <input type="hidden" id="id4" name="idfb5" value="0">
+                </div>
+                
 
 
                 <div class="botao1">
@@ -61,22 +122,26 @@
                 </div>
             </form>
         </div>
-        <?php
-        session_start();
         
-        require_once 'banco.php';
-        $banco = new Banco();
-        /*
-         * chama duas vezes(solução provisoria para atualizar o vetor de disciplina)
-         * inseri um if para checar se é a primeira vez que executa mas mesmo assim não funciona
-         * se retirar o if caso algum atualize a pagina vai marcar como feito e se não chamar
-         * duas vezes o usuario tem que da f5 para mostrar as perguntas corretas
-         */
-        $banco->buscarPergunta();
-        $saida = $banco->buscarPergunta();
-        ?>
         <script>
             pergunta();
+            //checar se a segunda pergunta existe
+            if (document.getElementById("id1").value == 0) {
+                document.getElementById("divP2").style.display = "none";
+                document.getElementById("pergunta1").style.display = "none";
+            }
+            if (document.getElementById("id2").value == 0) {
+                document.getElementById("divP3").style.display = "none";
+                document.getElementById("pergunta2").style.display = "none";
+            }
+            if (document.getElementById("id3").value == 0) {
+                document.getElementById("divP4").style.display = "none";
+                document.getElementById("pergunta3").style.display = "none";
+            }
+            if (document.getElementById("id4").value == 0) {
+                document.getElementById("divP5").style.display = "none";
+                document.getElementById("pergunta4").style.display = "none";
+            }
             function pergunta() {
                 var perguntas = <?php echo json_encode($saida); ?>;
                 var pergunta = perguntas.split(";");

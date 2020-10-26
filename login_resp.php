@@ -32,19 +32,19 @@
                 <?php
                 require_once 'banco.php';
                 session_start();
-                if ((isset($_SESSION['ra']) == true) and ( isset($_SESSION['senha']) == true)) {
-                    header('location:paginaPerguntas2.php');
+                //Lembrete para checar se a verificação esta certa e é necessaria
+                if (empty($_SESSION['ra']) and empty($_SESSION['senha'])) {
+                    header('location:login.php');
                 }
 
                 $banco = new Banco();
-
                 $ra = filter_input(INPUT_POST, 'user');
                 $senha = filter_input(INPUT_POST, 'senha');
-
                 if ($banco->checarRA($ra)) {
                     $banco->login($ra, $senha);
                 } else {
-                    echo 'Usuario invalido';
+                    $_SESSION['loginerror'] = 1;
+                    header('Location: login.php');
                 }
                 ?>
 

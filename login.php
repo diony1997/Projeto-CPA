@@ -39,18 +39,21 @@
                         <input class="botão" type="submit" value="Login">
                         <br/><br/>
                     </form>
-                    <div id = "rec">
-                        <a class = "recuperacao" href=RecUsuario.html>Recuperar Senha</a>
-                    </div>
+                    <?php
+                    session_start();
+                    if (isset($_SESSION['loginerror'])) {
+                        if ($_SESSION['loginerror'] == 1) {
+                            echo '<span style="color:#B22222;text-align:center;">RA inválido</span>';
+                        } 
+                        if($_SESSION['loginerror'] == 2){
+                            echo '<span style="color:#B22222;text-align:center;">Senha inválida</span>';
+                        }
+                    }
+                    session_unset();
+                    ?>
                 </div>
             </div>
         </header>
-        <?php
-        session_start();
-        if (isset($_SESSION['message'])) {
-            print $_SESSION['message'];
-            $_SESSION['message'] = null;
-        }
-        ?>
+
     </body>
 </html>
