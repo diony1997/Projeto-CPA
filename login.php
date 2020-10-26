@@ -32,9 +32,9 @@
                     <form action="login_resp.php" method="post">
                         <h1>LOGIN</h1>
                         <br/>
-                        <input class="caixa" type="text" name="user" placeholder="RA">
+                        <input class="caixa" type="text" name="user" placeholder="RA" required>
                         <br/><br/>        
-                        <input class="caixa" type="password" name="senha" placeholder="Senha">
+                        <input class="caixa" type="password" name="senha" placeholder="Senha" required>
                         <br/><br/>
                         <input class="botão" type="submit" value="Login">
                         <br/><br/>
