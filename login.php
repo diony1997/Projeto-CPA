@@ -20,26 +20,24 @@
         <header>
 
             <div id = "fundo">
-                <img src = "css/fundo.jpg" alt = "">
+                <img src = "img/fundo.jpg" alt = "">
             </div>
 
             <div class = "wrapper">
                 <div class="imagem">
-                    <img class = "cpa" src="img/cpa.png">
+                    <img class = "cpa" src="img/CPA_Logo_UAM.png">
                 </div>
 
                 <div class="insert">
                     <form action="login_resp.php" method="post">
-                        <h1>LOGIN</h1>
+                       <h1>LOGIN</h1>
                         <br/>
-                        <input class="caixa" type="text" name="user" placeholder="RA" required>
+                        <input class="caixa" type="text" name="user" placeholder="RA" />
                         <br/><br/>        
-                        <input class="caixa" type="password" name="senha" placeholder="Senha" required>
+                        <input class="botão" type="button" value="Login" />
                         <br/><br/>
-                        <input class="botão" type="submit" value="Login">
-                        <br/><br/>
-                    </form>
-                    <?php
+                        </form>
+                        <?php
                     session_start();
                     if (isset($_SESSION['loginerror'])) {
                         if ($_SESSION['loginerror'] == 1) {
