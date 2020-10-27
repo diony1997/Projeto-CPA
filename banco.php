@@ -97,10 +97,10 @@ class Banco {
         $curso = $row["idcurso"];
 
         //busca as perguntas do curso
-        $sql = "SELECT id FROM `pergunta` WHERE idCurso = '" . $curso . "' and dataInicial <= '".$data_atual."' and dataFinal > '".$data_atual."'";
+        $sql = "SELECT id FROM `pergunta` WHERE idCurso = '" . $curso . "' and dataInicial <= '" . $data_atual . "' and dataFinal > '" . $data_atual . "'";
         $stmt = mysqli_prepare($this->linkDB->con, $sql);
         if (!$stmt) {
-            die("Falha no comando SQL: busca das perguntas ".$data_atual);
+            die("Falha no comando SQL: busca das perguntas " . $data_atual);
         }
         $stmt->execute();
         $result = $stmt->get_result();
@@ -227,7 +227,7 @@ class Banco {
     }
 
     function gerarRelatorio($bloco) {
-        $sql = "SELECT curso.nome as Curso, pergunta.conteudo as Pergunta, (resposta.valor/resposta.cont) as Media ,resposta.cont as QTD_Respostas, resposta.blocoturma as Bloco from resposta\n"
+        $sql = "SELECT curso.nome as Curso, pergunta.conteudo as Pergunta, round(resposta.valor/resposta.cont) as Media ,resposta.cont as QTD_Respostas, resposta.blocoturma as Bloco from resposta\n"
                 . "inner JOIN pergunta on pergunta.id = resposta.idPergunta\n"
                 . "INNER JOIN curso on curso.id = pergunta.idCurso\n"
                 . "where blocoturma = '" . $bloco . "'";
@@ -269,41 +269,41 @@ class Banco {
         }
     }
 
-    function criarTabela(){
-        $tabela = '<table id="Relatorio" border="1">';//abre table
-        $tabela .='<thead>';//abre cabeçalho
-        $tabela .= '<tr>';//abre uma linha
+    function criarTabela() {
+        $tabela = '<table id="Relatorio" border="1">'; //abre table
+        $tabela .= '<thead>'; //abre cabeçalho
+        $tabela .= '<tr>'; //abre uma linha
         $tabela .= '<th>Curso</th>'; // colunas do cabeçalho
         $tabela .= '<th>Pergunta</th>';
         $tabela .= '<th>Média</th>';
         $tabela .= '<th>Quantidade de Respostas</th>';
         $tabela .= '<th>Bloco</th>';
-        $tabela .= '</tr>';//fecha linha
-        $tabela .='</thead>'; //fecha cabeçalho
-        $tabela .='<tbody>';//abre corpo da tabela
-        
+        $tabela .= '</tr>'; //fecha linha
+        $tabela .= '</thead>'; //fecha cabeçalho
+        $tabela .= '<tbody>'; //abre corpo da tabela
+
         return $tabela;
     }
-    
-    function inserirTabela($row, $tabela){
+
+    function inserirTabela($row, $tabela) {
         $tabela .= '<tr>'; // abre uma linha
-        $tabela .= '<td>'.$row["Curso"].'</td>';
-        $tabela .= '<td>'.$row["Pergunta"].'</td>';
-        $tabela .= '<td>' .$row["Media"].'</td>'; 
-        $tabela .= '<td>' .$row["QTD_Respostas"].'</td>';
-        $tabela .= '<td>' .$row["Bloco"].'</td>';
+        $tabela .= '<td>' . $row["Curso"] . '</td>';
+        $tabela .= '<td>' . $row["Pergunta"] . '</td>';
+        $tabela .= '<td>' . $row["Media"] . '</td>';
+        $tabela .= '<td>' . $row["QTD_Respostas"] . '</td>';
+        $tabela .= '<td>' . $row["Bloco"] . '</td>';
         $tabela .= '</tr>'; // fecha linha
-        
+
         return $tabela;
     }
-    
-    function fecharTabela($tabela){
-        $tabela .='</tbody>'; //fecha corpo
-        $tabela .= '</table>';//fecha tabela
-        
+
+    function fecharTabela($tabela) {
+        $tabela .= '</tbody>'; //fecha corpo
+        $tabela .= '</table>'; //fecha tabela
+
         return $tabela;
     }
-    
+
     function __destruct() {
         $this->linkDB = NULL;
     }

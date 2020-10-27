@@ -15,12 +15,9 @@ and open the template in the editor.
     </body>
 </html>
 <?php
-require_once 'banco.php';
 session_start();
 if (empty($_SESSION['ra']) and empty($_SESSION['senha'])) {
     header('location:login.php');
 }
-$banco = new Banco();
-$banco->gerarRelatorio($_SESSION['bloco']);
-session_destroy();
+session_unset();
 ?>

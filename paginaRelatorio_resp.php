@@ -1,10 +1,10 @@
 <?php
-    session_start();
+    /*session_start();
     
     if (empty($_SESSION['ra']) and  empty($_SESSION['senha'])) {
         header('Location: login.php');
     }
-    
+    */
     require_once 'banco.php';
     $banco = new Banco();
     
