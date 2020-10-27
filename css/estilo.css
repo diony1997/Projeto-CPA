@@ -8,19 +8,6 @@
 
 @media (min-width: 800px)
 {
-    /*body
-    {
-        background-color: #ffffff;
-        min-height: 100%;
-        min-width: 1024px;
-        max-width:100%;
-        height:auto;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-image: url("fundo.jpg");
-        background-repeat: no-repeat;
-    }*/
 
     #fundo
     {
@@ -45,8 +32,8 @@
 
     .cpa
     {
-        width: 250px;
-        height: 152px;
+        width: 395px;
+        height: 140px;
         margin-top: 40px;
     }
 
@@ -58,13 +45,13 @@
         margin-top: -350px;
         margin-left: -200px;
         text-align: center;
-        width:400px;
+        width:450px;
         height:700px;
-        background: rgb(0,172,141);
-        background: -moz-linear-gradient(0deg, rgba(0,172,141,1) 17%, rgba(9,68,182,1) 100%);
-        background: -webkit-linear-gradient(0deg, rgba(0,172,141,1) 17%, rgba(9,68,182,1) 100%);
-        background: linear-gradient(0deg, rgba(0,172,141,1) 17%, rgba(9,68,182,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00ac8d",endColorstr="#0944b6",GradientType=1);
+        background: rgb(0,172,142);
+        background: -moz-linear-gradient(0deg, rgba(0,172,142,1) 0%, rgba(9,123,182,1) 80%);
+        background: -webkit-linear-gradient(0deg, rgba(0,172,142,1) 0%, rgba(9,123,182,1) 80%);
+        background: linear-gradient(0deg, rgba(0,172,142,1) 0%, rgba(9,123,182,1) 80%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00ac8e",endColorstr="#097bb6",GradientType=1); 
         border-radius: 25px;
     }
 
@@ -84,9 +71,7 @@
         width: 170px;
         border-radius: 4px;
         font-size: 17px;
-        /*float: right;
-        margin-right: 165px;
-        margin-top: 6px;*/
+        margin-top: 16px;
     }
 
     input.caixa
