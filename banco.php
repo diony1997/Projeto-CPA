@@ -227,7 +227,7 @@ class Banco {
     }
 
     function gerarRelatorio($bloco) {
-        $sql = "SELECT curso.nome as Curso, pergunta.conteudo as Pergunta, round(resposta.valor/resposta.cont) as Media ,resposta.cont as QTD_Respostas, resposta.blocoturma as Bloco from resposta\n"
+        $sql = "SELECT curso.nome as Curso, pergunta.conteudo as Pergunta, replace(resposta.valor/resposta.cont,'.',',') as Media ,resposta.cont as QTD_Respostas, resposta.blocoturma as Bloco from resposta\n"
                 . "inner JOIN pergunta on pergunta.id = resposta.idPergunta\n"
                 . "INNER JOIN curso on curso.id = pergunta.idCurso\n"
                 . "where blocoturma = '" . $bloco . "'";
