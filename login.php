@@ -30,13 +30,15 @@
 
                 <div class="insert">
                     <form action="login_resp.php" method="post">
-                       <h1>LOGIN</h1>
+                        <h1>LOGIN</h1>
                         <br/>
                         <input class="caixa" type="text" name="user" placeholder="RA" />
-                        <br/><br/>        
+                        <br/><br/>
+                        <input class="caixa" type="password" name="senha" placeholder="Senha" />
+                        <br/><br/>    
                         <input class="botão" type="button" value="Login" />
                         <br/><br/>
-                        </form>
+                     </form>
                         <?php
                     session_start();
                     if (isset($_SESSION['loginerror'])) {
