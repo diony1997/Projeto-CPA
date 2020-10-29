@@ -192,7 +192,7 @@ class Banco {
     //retorna uma String: idPergunta, Conteudo
     function pergunta($idpergunta) {
         $saida = "";
-        $sql = "SELECT id,conteudo FROM `pergunta` WHERE id = '" . $idpergunta . "'";
+        $sql = "SELECT id,conteudo,tipo FROM `pergunta` WHERE id = '" . $idpergunta . "'";
         $stmt = mysqli_prepare($this->linkDB->con, $sql);
         if (!$stmt) {
             die("Falha no comando SQL: select pergunta " . $idpergunta);
@@ -201,14 +201,19 @@ class Banco {
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $saida .= $row["id"] . "#" . $row["conteudo"] . ";";
+            $saida .= $row["id"] . "#" . $row["conteudo"] . "#" . $row["tipo"] . ";";
         }
         return $saida;
     }
 
-    function inserirResposta($valor, $idpergunta) {
+    function inserirResposta($valor, $idpergunta, $tipo) {
         $this->checarTabelaResp($idpergunta);
-        $sql = "UPDATE `resposta` SET `valor` = (valor + " . $valor . "), `cont` = (cont + 1) WHERE `resposta`.`blocoturma` = '" . $_SESSION['bloco'] . "' AND `resposta`.`idPergunta` = '" . $idpergunta . "'";
+        //tipo != 0, aluno selecionou q a resposta não é direcionada a ele,(não cursa a disciplina ou não tem aula com o professor)
+        if ($tipo == 0) {
+            $sql = "UPDATE `resposta` SET `valor` = (valor + " . $valor . "), `cont` = (cont + 1) WHERE `resposta`.`blocoturma` = '" . $_SESSION['bloco'] . "' AND `resposta`.`idPergunta` = '" . $idpergunta . "'";
+        } else {
+            $sql = "UPDATE `resposta` SET `valor` = (valor + " . $valor . "), `cont` = (cont + 1), `nulos` = (nulos + 1) WHERE `resposta`.`blocoturma` = '" . $_SESSION['bloco'] . "' AND `resposta`.`idPergunta` = '" . $idpergunta . "'";
+        }
         $stmt = mysqli_prepare($this->linkDB->con, $sql);
         if (!$stmt) {
             die("Falha no comando SQL: Update resposta");
@@ -227,7 +232,7 @@ class Banco {
     }
 
     function gerarRelatorio($bloco) {
-        $sql = "SELECT curso.nome as Curso, pergunta.conteudo as Pergunta, replace(resposta.valor/resposta.cont,'.',',') as Media ,resposta.cont as QTD_Respostas, resposta.blocoturma as Bloco from resposta\n"
+        $sql = "SELECT curso.nome as Curso, pergunta.conteudo as Pergunta, replace(resposta.valor/(resposta.cont-resposta.nulos),'.',',') as Media , resposta.cont as QTD_Respostas, resposta.nulos as QTD_Nulos, resposta.blocoturma as Bloco from resposta\n"
                 . "inner JOIN pergunta on pergunta.id = resposta.idPergunta\n"
                 . "INNER JOIN curso on curso.id = pergunta.idCurso\n"
                 . "where blocoturma = '" . $bloco . "'";
@@ -277,6 +282,7 @@ class Banco {
         $tabela .= '<th>Pergunta</th>';
         $tabela .= '<th>Média</th>';
         $tabela .= '<th>Quantidade de Respostas</th>';
+        $tabela .= '<th>Quantidade de Nulos</th>';
         $tabela .= '<th>Bloco</th>';
         $tabela .= '</tr>'; //fecha linha
         $tabela .= '</thead>'; //fecha cabeçalho
@@ -291,6 +297,7 @@ class Banco {
         $tabela .= '<td>' . $row["Pergunta"] . '</td>';
         $tabela .= '<td>' . $row["Media"] . '</td>';
         $tabela .= '<td>' . $row["QTD_Respostas"] . '</td>';
+        $tabela .= '<td>' . $row["QTD_Nulos"] . '</td>';
         $tabela .= '<td>' . $row["Bloco"] . '</td>';
         $tabela .= '</tr>'; // fecha linha
 
@@ -302,6 +309,22 @@ class Banco {
         $tabela .= '</table>'; //fecha tabela
 
         return $tabela;
+    }
+
+    function impressao_curso() {
+        $sql = "SELECT id, nome FROM `curso`";
+        $stmt = mysqli_prepare($this->linkDB->con, $sql);
+        if (!$stmt) {
+            die("Falha no comando SQL: checar tabela resposta");
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<option value="' . $row["id"] . '">' . $row["nome"] . '</option>';
+               
+            }
+        }
     }
 
     function __destruct() {

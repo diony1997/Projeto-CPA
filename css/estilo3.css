@@ -3,7 +3,7 @@
         background-color: rgba(255, 255, 255, 0.877);
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)
     }
-    
+
     header .logo{
         padding-left: 2%;
         max-width:200px;
@@ -11,12 +11,12 @@
         width: auto;
         height: auto;
     }
-    
+
     body{
         font-size: 100%;
         background-repeat: no-repeat;
     }
-    
+
     div.pergunta{
         background-color: rgba(255, 255, 255, 0.842);
         height: auto;
@@ -41,12 +41,12 @@
         font-size: 250%;
         padding-bottom: 1.5%;
     }
-    
+
     div.botao1{
         padding-top: 3%;
         float: right;
     }
-    
+
     .botao{
         background-color:rgb(255, 255, 255);
         border: none;
@@ -56,7 +56,7 @@
         font-size: 19px;
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)
     }
-    
+
     .botao:hover{
         background-image: linear-gradient(to left, #1D364E, #00AC8D);
         color: white;
@@ -65,12 +65,12 @@
     .estrelas input[type=radio] {
         display: none;
     }
-      
+
     .estrelas label i.fa:before {
         content:'\f005';
         color: #FC0;
     }
-      
+
     .estrelas input[type=radio]:checked ~ label i.fa:before {
         color: #CCC;
     }
@@ -88,7 +88,7 @@
         background-color: rgba(255, 255, 255, 0.877);
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)
     }
-    
+
     header .logo{
         padding-left: 100px;
         max-width:300px;
@@ -96,11 +96,11 @@
         width: auto;
         height: auto;
     }
-    
+
     body{
         font-size: 100%;
     }
-    
+
     div.pergunta{
         background-color: rgba(255, 255, 255, 0.842);
         height: auto;
@@ -124,12 +124,12 @@
         text-align: center;
         padding-bottom: 1.5%;
     }
-    
+
     div.botao1{
         padding-top: 3%;
         float: right;
     }
-    
+
     .botao{
         background-color:rgb(255, 255, 255);
         border: none;
@@ -139,7 +139,7 @@
         font-size: 19px;
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)
     }
-    
+
     .botao:hover{
         background-image: linear-gradient(to left, #1D364E, #00AC8D);
         color: white;
@@ -148,12 +148,12 @@
     .estrelas input[type=radio] {
         display: none;
     }
-      
+
     .estrelas label i.fa:before {
         content:'\f005';
         color: #FC0;
     }
-      
+
     .estrelas input[type=radio]:checked ~ label i.fa:before {
         color: #CCC;
     }
@@ -163,4 +163,8 @@
         src: url("../fonte/Cairo-Regular.ttf");
     }
 
+    div.tipo{
+        font-size: 50%;
+        text-align: center;
+    }
 }

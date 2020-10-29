@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once 'banco.php';
+$banco = new Banco();
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -5,82 +10,42 @@
     </head>
     <body>
         <form action="index_resp.php" method="post">
-            codigo: <input name="codigo"/> <br>
-            Nome: <input name="nome"/> <br>
+            codigo: <input name="codigo"/> <br><br>
+            <select name="curso" id="cars">
+                <?php 
+                $banco->impressao_curso();
+                ?>
+            </select>
+            <br><br>
+
+            Nome: <input id="teste3" name="nome"/> <br>
             Preco: <input name="preco"/> <br>
             <input type="submit"/> <br>
-
         </form>
 
-
-        URL: <input type="text" id="novaURL"/> <br>
+        URL: <input type="text" value="www.msn.com" id="novaURL"/> <br>
         <input type="submit" value="Gerar QRCode" onclick="gerarQR()"/><br>
         <div id="qrcode"></div>
 
-        <input type="button" onclick="buscarPerguntas()"/>
 
 
-
-
-        <p id="message"></p>
-
-
-        <?php
-        require_once 'banco.php';
-        $banco = new Banco();
-        session_start();
-        if (!(isset($_SESSION['ra']) == true) and ( !isset($_SESSION['senha']) == true)) {
-            header('location: login.php');
-        }
-        $saida = $banco->buscarPergunta("mat1");
-
-
-        /*
-          $banco->apagarPergunta(3);
-         * 
-         */
-        /*
-          Exemplo inserir pergunta
-          $banco->inserirPergunta(5, "Pergunta teste", "mat3");
-         * 
-         */
-        /* Exemplo buscar pergunta
-         * $banco->buscarPergunta("mmm");
-          session_start();
-          if (isset($_SESSION['message'])) {
-          print $_SESSION['message'];
-          $_SESSION['message'] = null;
-          }
-         */
-        ?>
-
-        <script src = "qrcode.min.js" ></script>
-
+        <script src="js/easy.qrcode.js"></script>
         <script>
             var url = document.getElementById('novaURL');
-            var qrcode = new QRCode(document.getElementById('qrcode'));
+            var qrcode = new QRCode(document.getElementById('qrcode'), {
+                text: url.value,
+                title: "Pesquisa CPA",
+                titleFont: "bold 16px Arial",
+                titleColor: "#000000",
+                titleBackgroundColor: "#ffffff",
+                titleHeight: 50,
+                titleTop: 30
+            });
+
             function gerarQR() {
                 qrcode.makeCode(url.value);
             }
-            function escrever() {
-                document.getElementById("message").innerHTML = "your text here";
-            }
-
-            function buscarPerguntas() {
-                var perguntas = <?php echo json_encode($saida); ?>;
-                if (perguntas === "") {
-                    document.getElementById("message").innerHTML = "Não há perguntas";
-                } else {
-                    var pergunta = perguntas.split(";");
-                    //cada interação do for é uma pergunta
-                    for (var i = 0; i < pergunta.length - 1; i++) {
-                        document.getElementById("message").innerHTML = pergunta[i];
-                    }
-                }
-            }
 
         </script>
-
-
     </body>
 </html>
