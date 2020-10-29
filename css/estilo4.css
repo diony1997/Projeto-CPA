@@ -20,46 +20,47 @@ div.logout{
 }
 
 div.principal{
-    background-color: #d5dfdb;
+    background-color: #d5dfdb00;
     height: 100%;
     padding-top: 12%;
     padding-left: 320px;
 }
 
 div.perguntas{
-    background-color: #1d364e;
+    background-color: #00ac8de5;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     color: white;
-    height: 60%;
+    height: 50%;
     width: 25%;
     display: inline-block;
-    font-size: 200%;
+    
 }
 
 div.qrcode{
     background-color: rgba(255, 255, 255, 0.877);
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     margin-left: 10%;
-    height: 60%;
+    height: 50%;
     width: 25%;
     display: inline-block;
-    font-size: 200%;
+    
 }
 
 div.relatorio{
-    background-color: #00ac8d;
+    background-color: #1d364ee0;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     margin-left: 10%;
-    height: 60%;
+    height: 50%;
     width: 25%;
     display: inline-block;
     color: white;
+    
 }
 
 .botao1{
-    background-color: #1d364ed0;
+    background-color: #1d364e00;
     border: none;
-    color:  white;
+    color: white;
     margin-top: 5%;
     margin-left: 5%;
     width: 90%;
@@ -70,7 +71,7 @@ div.relatorio{
 }
 
 .botao2{
-    background-color: rgba(255, 255, 255, 0.877);
+    background-color: rgba(255, 255, 255, 0);
     border: none;
     color:  rgba(63, 63, 63, 0.774);
     margin-top: 5%;
@@ -82,9 +83,9 @@ div.relatorio{
 }
 
 .botao3{
-    background-color: #00ac8dcb;
+    background-color: #00ac8d00;
     border: none;
-    color: white;
+    color:  white;
     margin-top: 5%;
     margin-left: 5%;
     width: 90%;
