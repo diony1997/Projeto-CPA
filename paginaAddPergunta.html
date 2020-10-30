@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Pesquisa CPA</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" media="(max-width: 640px)" href="max-640px.css">
+        <link rel="stylesheet" media="(min-width: 640px)" href="min-640px.css"> 
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/estilo4.css" />
+        <script src="lib/jquery/jquery.min.js"></script>
+        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body background="img/fundoPagina.png">
+        <div class="header">
+            <img class="logo" src="img/CPA_Logo_UAM.png" />
+
+            <div class="logout">
+                <button class="botao" ><span>Sair</span></button>
+            </div>
+        </div>
+            <div class="formulario">
+                <form>
+                    <p>Curso</p>
+                    <input type="text" name="curso">
+                    <p>Pergunta</p>
+                    <textarea name=pergunta></textarea>
+                    <p>Disciplina</p>
+                    <input type="text" name="disciplina">
+                    <p>Professor</p>
+                    <input type="text" name="professor">
+                    <p>Tipo de pergunta</p>
+                    <select name=tipo>
+                        <option value=infraestrutura>Infraestrutura</option>
+                        <option value=professor>Professor</option>
+                        <option value=disciplina>Disciplina</option>
+                    </select>
+                    <p>Data inicial</p>
+                    <input type="date" name="dataInicial">
+                    <p>Data final</p>
+                    <input type="date" name="dataFinal">
+                    <br><br><input type="submit" value="Enviar">
+                </form>
+            </div>
+    </body>
+</html>
