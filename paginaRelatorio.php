@@ -1,12 +1,12 @@
 <?php
-  /*  session_start();
+/*  session_start();
 
-    if (empty($_SESSION['ra']) and  empty($_SESSION['senha'])) {
-        header('Location: login.php');
-    }
-    */
-    require_once 'banco.php';
-    $banco = new Banco();
+  if (empty($_SESSION['ra']) and  empty($_SESSION['senha'])) {
+  header('Location: login.php');
+  }
+ */
+require_once 'banco.php';
+$banco = new Banco();
 ?>
 
 <html>
@@ -16,8 +16,10 @@
     </head>
     <body>
         <form action="paginaRelatorio_resp.php" method="post">
-            <input type="text" name="bloco">
-            <input type="submit" value="Gerar Relatório">
+            <?php
+            $banco->impressao_bloco();
+            ?>
+
         </form>
     </body>
 </html>

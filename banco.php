@@ -47,6 +47,41 @@ class Banco {
         }
     }
 
+    function checarUser($user) {
+        $sql = "SELECT * FROM `user` WHERE id = '" . $user . "'";
+        $stmt = mysqli_prepare($this->linkDB->con, $sql);
+        if (!$stmt) {
+            die("Falha no comando SQL: Checar User");
+        }
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function loginUser($user, $senha) {
+        $sql = "SELECT * FROM `user` WHERE id = '" . $user . "' && senha = '" . $senha . "'";
+        $stmt = mysqli_prepare($this->linkDB->con, $sql);
+        if (!$stmt) {
+            die("Falha no comando SQL: COnferir user e Senha");
+        }
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows != 0) {
+            $_SESSION['user'] = $user;
+            $_SESSION['senha'] = $senha;
+            header('location: paginaAdmin.php');
+        } else {
+            unset($_SESSION['user']);
+            unset($_SESSION['senha']);
+            $_SESSION['loginerror'] = 2;
+            header('Location: loginUser.php');
+        }
+    }
+
     function buscarBloco() {
         $sql = "SELECT bloco FROM `aluno` WHERE ra = '" . $_SESSION['ra'] . "'";
         $stmt = mysqli_prepare($this->linkDB->con, $sql);
@@ -66,20 +101,6 @@ class Banco {
             die("Falha no comando SQL");
         }
         $stmt->execute();
-    }
-
-    function alterarSenha($ra, $senhaOld, $senhaNew) {
-        if (login($ra, $senhaOld)) {
-            //senha antiga igual
-            //Implementar
-        } else {
-            $sql = "UPDATE `aluno` SET `Password` = '" . $senhaNew . "' WHERE `aluno`.`RA` = '" . $ra . "'";
-            $stmt = mysqli_prepare($this->linkDB->con, $sql);
-            if (!$stmt) {
-                die("Falha no comando SQL");
-            }
-            $stmt->execute();
-        }
     }
 
     //busca todas perguntas disponiveis no curso
@@ -322,9 +343,29 @@ class Banco {
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<option value="' . $row["id"] . '">' . $row["nome"] . '</option>';
-               
             }
         }
+    }
+    
+    function impressao_bloco() {
+        $sql = "SELECT blocoturma FROM `resposta` group by blocoturma";
+        $stmt = mysqli_prepare($this->linkDB->con, $sql);
+        if (!$stmt) {
+            die("Falha no comando SQL: checar bloco resposta");
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            echo '<select name="bloco" id="cars">';
+            while ($row = $result->fetch_assoc()) {
+                echo '<option value="' . $row["blocoturma"] . '">' . $row["blocoturma"] . '</option>';
+            }
+            echo '</select><input type="submit" value="Gerar Relatório">';
+        } else {
+                echo '<h2> Nenhuma Pergunta Respondida </h2>';
+
+        }
+       
     }
 
     function __destruct() {

@@ -12,7 +12,7 @@ $banco = new Banco();
         <form action="index_resp.php" method="post">
             codigo: <input name="codigo"/> <br><br>
             <select name="curso" id="cars">
-                <?php 
+                <?php
                 $banco->impressao_curso();
                 ?>
             </select>
@@ -26,6 +26,7 @@ $banco = new Banco();
         URL: <input type="text" value="www.msn.com" id="novaURL"/> <br>
         <input type="submit" value="Gerar QRCode" onclick="gerarQR()"/><br>
         <div id="qrcode"></div>
+        <img id="QR" />
 
 
 
@@ -39,11 +40,16 @@ $banco = new Banco();
                 titleColor: "#000000",
                 titleBackgroundColor: "#ffffff",
                 titleHeight: 50,
-                titleTop: 30
+                titleTop: 30,
             });
 
             function gerarQR() {
-                qrcode.makeCode(url.value);
+                var divText = document.getElementById("qrcode").outerHTML;
+                var janela = window.open('', '', 'width=260,height=310');
+                var doc = janela.document;
+                doc.open();
+                doc.write(divText);
+                doc.close();
             }
 
         </script>
