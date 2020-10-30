@@ -3,20 +3,25 @@ div.header{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     float: left;
     height: 100%;
+    width: 13%;
 }
 
 div.header .logo{
-    padding-left: 10px;
-    max-width:250px;
-    max-height:150px;
+    padding-left: 2%;
+    max-width:100%;
     width: auto;
-    height: auto;
 }
 
-div.logout{
-    padding-top: 800px;
+.botao{
     text-align: center;
+    border: none;
     font-size: 150%;
+    color : white;
+    background-image: linear-gradient(to left, #1D364E, #00AC8D);
+    position: absolute;
+    bottom: 0;
+    width: 13%;
+    height: 7%;
 }
 
 div.principal{
@@ -92,4 +97,57 @@ div.relatorio{
     height: 90%;
     font-size: 50px;
     text-align: left;
+}
+
+div.formulario{
+    background-color: rgba(14, 115, 110, 0.87);
+    padding-left: 5%;
+    padding-top: 5%;
+    margin-left: 15%;
+    width: 85%;
+    height: 100%;
+}
+
+p{
+    color:white;
+    font-size: 130%;
+    padding-top: 1%;
+}
+
+select{
+    padding: 0.5% 0.5%;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+    color: black;
+}
+
+input[type="text"]{
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    width: 20%;
+    height: 30px;
+}
+
+input[type="date"]{
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    
+    height: 30px;
+}
+
+textarea {
+    width: 70%;
+    height: 80px;
+    box-sizing: border-box;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+input[type=submit]{
+    border: none;
+    width: 100px;
+    height: 35px;
 }
