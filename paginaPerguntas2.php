@@ -12,6 +12,7 @@ $banco = new Banco();
 $banco->exibirPergunta();
 $saida = $banco->exibirPergunta();
 ?>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
