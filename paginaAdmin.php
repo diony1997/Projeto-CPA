@@ -21,6 +21,13 @@ if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
     <body background="img/fundoPagina.png">
         <div class="header">
             <img class="logo" src="img/CPA_Logo_UAM.png" />
+            
+            <div class="form">
+                <form>
+                    <input type="text" name="curso" placeholder="Curso" class="input1"><br><br>
+                    <input type="text" name="url" placeholder="URL" class="input1">
+                </form>
+            </div>
 
             <div class="logout">
                 <button class="botao" ><span>Sair</span></button>
