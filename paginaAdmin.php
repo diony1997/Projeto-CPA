@@ -1,10 +1,11 @@
 <?php
 session_start();
+require_once 'banco.php';
+$banco = new Banco();
 if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
     header('location:loginUser.php');
 }
 ?>
-<!DOCTYPE HTML>
 <html>
     <head>
         <meta charset="utf-8">
@@ -21,12 +22,20 @@ if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
     <body background="img/fundoPagina.png">
         <div class="header">
             <img class="logo" src="img/CPA_Logo_UAM.png" />
-            
+
             <div class="form">
-                <form>
-                    <input type="text" name="curso" placeholder="Curso" class="input1"><br><br>
-                    <input type="text" name="url" placeholder="URL" class="input1">
-                </form>
+                <label>Curso</label><br>
+                <?php
+                $banco->impressao_curso();
+                ?>
+                <br><br>
+                <label>Bloco</label><br>
+                <?php
+                $banco->impressao_bloco();
+                ?>
+                <br><br>
+                <label>URL</label><br>
+                <input type="text" id="novaURL" value="www.google.com" class="input1">
             </div>
 
             <div class="logout">
@@ -35,19 +44,26 @@ if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
         </div> 
         <div class="principal">
             <div class="perguntas">
-                <a href="#"><button class="botao1" ><span>Adicionar Perguntas</span></button></a>
+                <form action="paginaAddPergunta.php" method="post">
+                    <input type="hidden" id="cursoAd" name="cursoAdd">
+                    <button type="submit" class="botao1" ><span>Adicionar Perguntas</span></button>
+                </form>
             </div>
             <div class="qrcode">
                 <button class="botao2" onclick="abrirQR()"><span>Gerar QR Code</span></button>
             </div>
             <div class="relatorio">
-                <a href="paginaRelatorio.php"><button class="botao3" ><span>Gerar <br>Relatório</span></button></a>
+                <form action="paginaRelatorio_resp.php" method="post">
+                    <input type="hidden" id="cursoRe" name="bloco">
+                    <button class="botao3" ><span>Gerar <br>Relatório</span></button>
+                </form>
             </div>
         </div>
         <div id="QR" style="display: none;">
         </div>
         <script src="js/easy.qrcode.js"></script>
         <script>
+                    atualizar();
                     var qrcode = new QRCode(document.getElementById("QR"), {
                         text: "www.google.com",
                         title: "Pesquisa CPA",
@@ -57,7 +73,13 @@ if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
                         titleHeight: 50,
                         titleTop: 30
                     });
+                    function atualizar() {
+                        document.getElementById("cursoAd").value = document.getElementById("opCurso").value;
+                        document.getElementById("cursoRe").value = document.getElementById("opBloco").value;
+                    }
+
                     function abrirQR() {
+                        qrcode.makeCode(document.getElementById("novaURL").value);
                         var janela = window.open('', '', 'width=280,height=330,resizable');
                         janela.document.write(document.getElementById("QR").outerHTML);
                         janela.document.write('<title>QR Code</title><scri' + 'pt> document.getElementById("QR").style.display = "block"; </scri' + 'pt>');

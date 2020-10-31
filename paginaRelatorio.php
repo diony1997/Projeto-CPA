@@ -19,7 +19,7 @@ $banco = new Banco();
             <?php
             $banco->impressao_bloco();
             ?>
-
+            <input type="submit" value="Gerar Relatório">
         </form>
     </body>
 </html>

@@ -94,13 +94,23 @@ class Banco {
         $_SESSION['bloco'] = $row["bloco"];
     }
 
-    function inserirPergunta($pergunta, $materia) {
-        $sql = "INSERT INTO `perguntas` (`pergunta`, `materia`) VALUES ('" . $pergunta . "','" . $materia . "')";
+    function inserirPergunta($curso, $conteudo, $disciplina, $professor, $tipo, $dataInicial, $dataFinal) {
+        if ($tipo == 3) {
+            $sql = "INSERT INTO `pergunta` (`id`, `conteudo`, `tipo`,`idDisciplina`, `idProfessor`, `idCurso`, `dataInicial`, `dataFinal`)"
+                    . " VALUES (NULL, '" . $conteudo . "', '" . $tipo . "', NULL, NULL, '" . $curso . "', '" . $dataInicial . "', '" . $dataFinal . "')";
+        } else if ($tipo == 2) {
+            $sql = "INSERT INTO `pergunta` (`id`, `conteudo`, `tipo`,`idDisciplina`, `idProfessor`, `idCurso`, `dataInicial`, `dataFinal`)"
+                    . " VALUES (NULL, '" . $conteudo . "', '" . $tipo . "', NULL, '" . $professor . "', '" . $curso . "', '" . $dataInicial . "', '" . $dataFinal . "')";
+        } else {
+            $sql = "INSERT INTO `pergunta` (`id`, `conteudo`, `tipo`,`idDisciplina`, `idProfessor`, `idCurso`, `dataInicial`, `dataFinal`)"
+                    . " VALUES (NULL, '" . $conteudo . "', '" . $tipo . "', '" . $disciplina . "', '" . $professor . "', '" . $curso . "', '" . $dataInicial . "', '" . $dataFinal . "')";
+        }
         $stmt = mysqli_prepare($this->linkDB->con, $sql);
         if (!$stmt) {
-            die("Falha no comando SQL");
+            die("Falha no comando SQL: Inserção de Pergunta");
         }
         $stmt->execute();
+        echo 'Pergunta Inserida';
     }
 
     //busca todas perguntas disponiveis no curso
@@ -336,17 +346,62 @@ class Banco {
         $sql = "SELECT id, nome FROM `curso`";
         $stmt = mysqli_prepare($this->linkDB->con, $sql);
         if (!$stmt) {
-            die("Falha no comando SQL: checar tabela resposta");
+            die("Falha no comando SQL: Impressao Curso");
         }
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
+            echo '<select name="curso" id="opCurso" onclick="atualizar()">';
             while ($row = $result->fetch_assoc()) {
                 echo '<option value="' . $row["id"] . '">' . $row["nome"] . '</option>';
             }
+            echo '</select>';
+        } else {
+            echo '<h4>Nenhum Curso encontrado</h4>';
         }
     }
-    
+
+    function impressao_professor($curso) {
+        $sql = "SELECT professor.id as profId, professor.nome as profNome, disciplina.nome as discNome FROM `professor`\n"
+                . "                inner join Disciplina on disciplina.idProfessor = professor.id\n"
+                . "                inner join Curso on curso.id = disciplina.idCurso where curso.id = '".$curso."'";
+        $stmt = mysqli_prepare($this->linkDB->con, $sql);
+        if (!$stmt) {
+            die("Falha no comando SQL: Impressao Professor");
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            echo '<select name="professor">';
+            while ($row = $result->fetch_assoc()) {
+                echo '<option value="' . $row["profId"] . '">' . $row["profNome"] . ' - ' . $row["discNome"] . '</option>';
+            }
+            echo '</select>';
+        } else {
+            echo '<h4>Nenhum Professor encontrado</h4>';
+        }
+    }
+
+    function impressao_disciplina($curso) {
+        $sql = "SELECT disciplina.id as discId, disciplina.nome as discNome FROM `disciplina`"
+                . "inner join Curso on disciplina.idCurso = Curso.id where curso.id ='" . $curso . "'";
+        $stmt = mysqli_prepare($this->linkDB->con, $sql);
+        if (!$stmt) {
+            die("Falha no comando SQL: Impressao Disciplina");
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            echo '<select name="disciplina" id="disc2" onchange="atualizarDisc()">';
+            while ($row = $result->fetch_assoc()) {
+                echo '<option value="' . $row["discId"] . '">' . $row["discNome"] . '</option>';
+            }
+            echo '</select>';
+        } else {
+            echo '<h4>Nenhuma Disciplina encontrada</h4>';
+        }
+    }
+
     function impressao_bloco() {
         $sql = "SELECT blocoturma FROM `resposta` group by blocoturma";
         $stmt = mysqli_prepare($this->linkDB->con, $sql);
@@ -356,16 +411,14 @@ class Banco {
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
-            echo '<select name="bloco" id="cars">';
+            echo '<select name="bloco" id="opBloco" onclick="atualizar()">';
             while ($row = $result->fetch_assoc()) {
                 echo '<option value="' . $row["blocoturma"] . '">' . $row["blocoturma"] . '</option>';
             }
-            echo '</select><input type="submit" value="Gerar Relatório">';
+            echo '</select>';
         } else {
-                echo '<h2> Nenhuma Pergunta Respondida </h2>';
-
+            echo '<h2> Nenhuma Pergunta Respondida </h2>';
         }
-       
     }
 
     function __destruct() {

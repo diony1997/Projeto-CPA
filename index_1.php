@@ -14,13 +14,13 @@
 
 
         URL: <input type="text" id="novaURL"/> <br>
-        <input type="submit" value="Gerar QRCode" onclick="gerarQR()"/><br>
+        <input type="submit" id="old" value="Gerar QRCode" onclick="atualizar()"/><br>
         <div id="qrcode"></div>
 
 
 
 
-        <button onclick="pergunta()"></button>
+        <button onclick="atualizar()"></button>
         <h1 id="message0">Hello World!</h1>
         <h1 id="message1">Hello World!</h1>
 
@@ -29,7 +29,7 @@
         session_start();
         require_once 'banco.php';
         $banco = new Banco();
-        
+
 
         //$saida = $banco->buscarPergunta();
         ?>
@@ -37,11 +37,15 @@
         <script src = "qrcode.min.js" ></script>
 
         <script>
+            atualizar();
             var url = document.getElementById('novaURL');
             var qrcode = new QRCode(document.getElementById('qrcode'));
             pergunta();
             function gerarQR() {
                 qrcode.makeCode(url.value);
+            }
+            function atualizar() {
+                document.getElementById("novaURL").value = "My value";
             }
             function escrever() {
                 document.getElementById("message").innerHTML = "your text here";
