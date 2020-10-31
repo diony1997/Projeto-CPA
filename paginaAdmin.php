@@ -24,11 +24,6 @@ if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
             <img class="logo" src="img/CPA_Logo_UAM.png" />
 
             <div class="form">
-                <label>Curso</label><br>
-                <?php
-                $banco->impressao_curso();
-                ?>
-                <br><br>
                 <label>Bloco</label><br>
                 <?php
                 $banco->impressao_bloco();
@@ -39,13 +34,14 @@ if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
             </div>
 
             <div class="logout">
-                <button class="botao" ><span>Sair</span></button>
+                <form action="logout_user.php">
+                    <button type="submit" class="botao" ><span>Sair</span></button>
+                </form>
             </div>
         </div> 
         <div class="principal">
             <div class="perguntas">
                 <form action="paginaAddPergunta.php" method="post">
-                    <input type="hidden" id="cursoAd" name="cursoAdd">
                     <button type="submit" class="botao1" ><span>Adicionar Perguntas</span></button>
                 </form>
             </div>
@@ -74,7 +70,6 @@ if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
                         titleTop: 30
                     });
                     function atualizar() {
-                        document.getElementById("cursoAd").value = document.getElementById("opCurso").value;
                         document.getElementById("cursoRe").value = document.getElementById("opBloco").value;
                     }
 
@@ -84,6 +79,7 @@ if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
                         janela.document.write(document.getElementById("QR").outerHTML);
                         janela.document.write('<title>QR Code</title><scri' + 'pt> document.getElementById("QR").style.display = "block"; </scri' + 'pt>');
                     }
+
         </script>
 
     </body>

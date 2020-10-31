@@ -128,7 +128,7 @@ class Banco {
         $curso = $row["idcurso"];
 
         //busca as perguntas do curso
-        $sql = "SELECT id FROM `pergunta` WHERE idCurso = '" . $curso . "' and dataInicial <= '" . $data_atual . "' and dataFinal > '" . $data_atual . "'";
+        $sql = "SELECT id FROM `pergunta` WHERE idCurso = '" . $curso . "' and dataInicial <= '" . $data_atual . "' and dataFinal >= '" . $data_atual . "'";
         $stmt = mysqli_prepare($this->linkDB->con, $sql);
         if (!$stmt) {
             die("Falha no comando SQL: busca das perguntas " . $data_atual);
@@ -350,8 +350,9 @@ class Banco {
         }
         $stmt->execute();
         $result = $stmt->get_result();
+        echo '<p>Curso</p>';
         if ($result->num_rows > 0) {
-            echo '<select name="curso" id="opCurso" onclick="atualizar()">';
+            echo '<select name="curso" id="opCurso" onchange="atualizarDisc(this.value)">';
             while ($row = $result->fetch_assoc()) {
                 echo '<option value="' . $row["id"] . '">' . $row["nome"] . '</option>';
             }
@@ -361,24 +362,50 @@ class Banco {
         }
     }
 
-    function impressao_professor($curso) {
-        $sql = "SELECT professor.id as profId, professor.nome as profNome, disciplina.nome as discNome FROM `professor`\n"
-                . "                inner join Disciplina on disciplina.idProfessor = professor.id\n"
-                . "                inner join Curso on curso.id = disciplina.idCurso where curso.id = '".$curso."'";
-        $stmt = mysqli_prepare($this->linkDB->con, $sql);
-        if (!$stmt) {
-            die("Falha no comando SQL: Impressao Professor");
-        }
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result->num_rows > 0) {
-            echo '<select name="professor">';
-            while ($row = $result->fetch_assoc()) {
-                echo '<option value="' . $row["profId"] . '">' . $row["profNome"] . ' - ' . $row["discNome"] . '</option>';
+    function impressao_professor($tipo, $curso) {
+        //tipo 1 procura pelo curso
+        if ($tipo == 2) {
+            $sql = "SELECT professor.id as profId, professor.nome as profNome, disciplina.nome as discNome FROM `professor`\n"
+                    . "                inner join Disciplina on disciplina.idProfessor = professor.id\n"
+                    . "                inner join Curso on curso.id = disciplina.idCurso\n"
+                    . "                where curso.id = '" . $curso . "'";
+            $stmt = mysqli_prepare($this->linkDB->con, $sql);
+            if (!$stmt) {
+                die("Falha no comando SQL: Impressao Professor tipo 2");
             }
-            echo '</select>';
+            $stmt->execute();
+            $result = $stmt->get_result();
+            echo '<p>Professor</p>';
+            if ($result->num_rows > 0) {
+                echo '<select name="professor">';
+                while ($row = $result->fetch_assoc()) {
+                    echo '<option value="' . $row["profId"] . '">' . $row["profNome"] . ' - ' . $row["discNome"] . '</option>';
+                }
+                echo '</select>';
+            } else {
+                echo '<h4>Nenhum Professor encontrado</h4>';
+            }
         } else {
-            echo '<h4>Nenhum Professor encontrado</h4>';
+            //procura pela disciplina
+            $sql = "SELECT professor.id as profId, professor.nome as profNome FROM `professor`\n"
+                    . "                inner join Disciplina on disciplina.idProfessor = professor.id\n"
+                    . "                where disciplina.id = " . $curso;
+            $stmt = mysqli_prepare($this->linkDB->con, $sql);
+            if (!$stmt) {
+                die("Falha no comando SQL: Impressao Professor tipo 1");
+            }
+            $stmt->execute();
+            $result = $stmt->get_result();
+            echo '<p>Professor</p>';
+            if ($result->num_rows > 0) {
+                echo '<select name="professor">';
+                while ($row = $result->fetch_assoc()) {
+                    echo '<option value="' . $row["profId"] . '">' . $row["profNome"] . '</option>';
+                }
+                echo '</select>';
+            } else {
+                echo '<h4>Nenhum Professor encontrado</h4>';
+            }
         }
     }
 
@@ -391,14 +418,15 @@ class Banco {
         }
         $stmt->execute();
         $result = $stmt->get_result();
+        echo '<p>Disciplina</p>';
         if ($result->num_rows > 0) {
-            echo '<select name="disciplina" id="disc2" onchange="atualizarDisc()">';
+            echo '<select name="disciplina" id="disc2" onchange="atualizarProf(this.value)">';
             while ($row = $result->fetch_assoc()) {
                 echo '<option value="' . $row["discId"] . '">' . $row["discNome"] . '</option>';
             }
             echo '</select>';
         } else {
-            echo '<h4>Nenhuma Disciplina encontrada</h4>';
+            echo '<h4 id="helper">Nenhuma Disciplina encontrada</h4>';
         }
     }
 
@@ -411,7 +439,7 @@ class Banco {
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
-            echo '<select name="bloco" id="opBloco" onclick="atualizar()">';
+            echo '<select name="bloco" id="opBloco" onchange="atualizar()">';
             while ($row = $result->fetch_assoc()) {
                 echo '<option value="' . $row["blocoturma"] . '">' . $row["blocoturma"] . '</option>';
             }

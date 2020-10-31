@@ -1,20 +1,16 @@
 <?php
-    /*session_start();
-    
-    if (empty($_SESSION['ra']) and  empty($_SESSION['senha'])) {
-        header('Location: login.php');
-    }
-    */
-    require_once 'banco.php';
-    $banco = new Banco();
-    
-    $bloco = filter_input(INPUT_POST, 'bloco');
-    
-    $tabela = $banco->gerarRelatorio($bloco);
- 
-    
-    
-    
+session_start();
+
+if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
+    header('Location: loginUser.php');
+}
+
+require_once 'banco.php';
+$banco = new Banco();
+
+$bloco = filter_input(INPUT_POST, 'bloco');
+
+$tabela = $banco->gerarRelatorio($bloco);
 ?>
 <html>
     <head>
@@ -24,9 +20,9 @@
     </head>
     <body>
         <?php
-            echo $tabela;
+        echo $tabela;
         ?>
-        
+
         <br>
         <br>
         <a download="relatorio.xls" href="#" onclick="return ExcellentExport.excel(this, 'Relatorio', 'Relatório');">Export to Excel</a>
