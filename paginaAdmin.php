@@ -59,7 +59,6 @@ if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
         </div>
         <script src="js/easy.qrcode.js"></script>
         <script>
-                    atualizar();
                     var qrcode = new QRCode(document.getElementById("QR"), {
                         text: "www.google.com",
                         title: "Pesquisa CPA",
@@ -69,6 +68,7 @@ if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
                         titleHeight: 50,
                         titleTop: 30
                     });
+                    atualizar();
                     function atualizar() {
                         document.getElementById("cursoRe").value = document.getElementById("opBloco").value;
                     }

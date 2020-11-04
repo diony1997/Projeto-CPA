@@ -383,7 +383,7 @@ class Banco {
                 }
                 echo '</select>';
             } else {
-                echo '<h4>Nenhum Professor encontrado</h4>';
+                echo '<h4 id="noProf">Nenhum Professor encontrado</h4>';
             }
         } else {
             //procura pela disciplina
