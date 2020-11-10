@@ -34,7 +34,7 @@ if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
                 <br><br>
                 <form enctype=multipart/form-data action="paginaAdmin_resp.php" method="POST">
                     <label>Adicionar ao Banco</label><br>
-                    <input name="file" type="file" /><br>
+                    <input name="file" type="file" accept=".csv" /><br>
                     <input type="submit" value="Enviar" name="submit">
                 </form>
             </div>
