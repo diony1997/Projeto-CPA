@@ -6,7 +6,7 @@ require_once './banco_preencher.php';
 
 $banco = new Banco_preencher();
 
-if (isset($_FILES['file'])) {
+if (isset($_FILES['file']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
     $caminho = $_FILES['file']['tmp_name'];
     $fp = fopen($caminho, "r");
     $cont = 0;
@@ -39,7 +39,7 @@ if (isset($_FILES['file'])) {
     echo "Dados Inseridos";
 
 } else {
-    echo 'Erro: Arquivo Não Encontrado';
+    echo 'Erro no envio do arquivo';
 }
 
 ?>
