@@ -31,6 +31,12 @@ if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
                 <br><br>
                 <label>URL</label><br>
                 <input type="text" id="novaURL" value="www.google.com" class="input1">
+                <br><br>
+                <form enctype=multipart/form-data action="paginaAdmin_resp.php" method="POST">
+                    <label>Adicionar ao Banco</label><br>
+                    <input name="file" type="file" /><br>
+                    <input type="submit" value="Enviar" name="submit">
+                </form>
             </div>
 
             <div class="logout">
