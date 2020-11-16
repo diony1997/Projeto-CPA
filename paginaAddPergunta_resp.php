@@ -12,23 +12,45 @@ $banco = new Banco();
 
 
 $curso = filter_input(INPUT_POST, 'curso');
-echo 'O curso é ' . $curso . "<br>";
 $conteudo = filter_input(INPUT_POST, 'pergunta');
-echo 'O conteudo é ' . $conteudo . "<br>";
 $disciplina = filter_input(INPUT_POST, 'disciplina');
-echo 'A disciplina é ' . $disciplina . "<br>";
 $professor = filter_input(INPUT_POST, 'professor');
-echo 'O professor é ' . $professor . "<br>";
 $tipo = filter_input(INPUT_POST, 'tipo');
-echo 'O tipo é ' . $tipo . "<br>";
 $dataInicial = filter_input(INPUT_POST, 'dataInicial');
-echo 'A dataInicial é ' . $dataInicial . "<br>";
 $dataFinal = filter_input(INPUT_POST, 'dataFinal');
-echo 'A dataFinal é ' . $dataFinal . "<br>";
 
 $banco->inserirPergunta($curso, $conteudo, $disciplina, $professor, $tipo, $dataInicial, $dataFinal)
 ?>
-<form action="paginaAdmin.php">
-    <button type="submit"><span>HOME</span></button>
-</form>
 
+<html>
+    <head>
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" media="(max-width: 900px)" href="css/estilo2.css">
+        <link rel="stylesheet" media="(min-width: 900px)" href="css/estilo2.css">
+        <script src="lib/jquery/jquery.min.js"></script>
+        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+
+        <meta charset = "UTF-8">
+
+        <title>Pergunta Inserida</title>
+        
+    </head>
+
+    <body background = "img/fundoPagina.png" alt = "">
+        <header>
+            <div class="wrapper">
+                <img class = "cpa" src="img/CPA_Logo_UAM.png"/>
+                <div class="caption">
+                    <h1>PERGUNTA INSERIDA</h1>
+                    <p>Os dados foram inseridos com sucesso no sistema</p>
+                    <br/><br/>
+                    <form action="paginaAdmin.php">
+                        <button type="submit" class="btn btn-success">VOLTAR AO INÍCIO</button></p>
+                    </form>
+                </div>
+            </div>
+        </header>
+    </body>
+</html>
