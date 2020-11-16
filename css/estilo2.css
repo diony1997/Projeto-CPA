@@ -1,0 +1,50 @@
+@media (min-width: 500px) and (max-width: 900px)
+{
+    body{
+    background:white;
+    background-position: relative;
+    }
+}
+
+@media (min-width: 900px)
+{
+
+    body
+    {
+        background-size: 100% 100%;
+    }
+
+    .cpa
+    {
+        width: 395px;
+        height: 140px;
+        margin-top: 40px;
+    }  
+
+    header .caption
+    {
+        text-align: center;
+    }
+
+    @font-face {
+        font-family: fontenova;
+        src: url("../fonte/Cairo-Regular.ttf");
+    }
+
+    div.wrapper
+    {  
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -300px;
+        margin-left: -380px;
+        text-align: center;
+        width:700px;
+        height:450px;
+        background: rgba(255, 255, 255, 0.774);
+        border-radius: 20px;
+        font-family: 'fontenova';
+        font-size: 20px;
+    }
+
+}
