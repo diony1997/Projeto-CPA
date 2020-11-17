@@ -23,19 +23,19 @@ $banco->inserirPergunta($curso, $conteudo, $disciplina, $professor, $tipo, $data
 
 <html>
     <head>
-        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" media="(max-width: 900px)" href="css/estilo2.css">
-        <script src="lib/jquery/jquery.min.js"></script>
-        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" media="(max-width: 900px)" href="../css/estilo2.css">
+        <script src="../lib/jquery/jquery.min.js"></script>
+        <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
         <meta charset = "UTF-8">
         <title>Pergunta Inserida</title>
     </head>
 
-    <body background="img/fundoPagina.png">        
+    <body background="../img/fundoPagina.png">        
         <header>
             <div class="wrapper">
-                <img class = "cpa" src="img/CPA_Logo_UAM.png"/>
+                <img class = "cpa" src="../img/CPA_Logo_UAM.png"/>
                 <div class="caption">
                     <h1>PERGUNTA INSERIDA</h1>
                     <p>Os dados foram inseridos com sucesso no sistema</p>

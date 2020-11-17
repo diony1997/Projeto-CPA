@@ -15,14 +15,14 @@ $banco = new Banco();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" media="(max-width: 640px)" href="max-640px.css">
         <link rel="stylesheet" media="(min-width: 640px)" href="min-640px.css"> 
-        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/estilo4.css" />
-        <script src="lib/jquery/jquery.min.js"></script>
-        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../css/estilo4.css" />
+        <script src="../lib/jquery/jquery.min.js"></script>
+        <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
     </head>
-    <body background="img/fundoPagina.png">
+    <body background="../img/fundoPagina.png">
         <div class="header">
-            <img class="logo" src="img/CPA_Logo_UAM.png" />
+            <img class="logo" src="../img/CPA_Logo_UAM.png" />
 
             <div class="logout">
                 <form action="paginaAdmin.php">

@@ -22,21 +22,21 @@ $saida = $banco->exibirPergunta();
         <link rel="stylesheet" media="(max-width: 640px)" href="max-640px.css">
         <link rel="stylesheet" media="(min-width: 640px)" href="min-640px.css"> 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/estilo3.css" />
-        <script src="lib/jquery/jquery.min.js"></script>
-        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../css/estilo3.css" />
+        <script src="../lib/jquery/jquery.min.js"></script>
+        <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
     </head>
-    <body background="img/fundoPagina.png">
+    <body background="../img/fundoPagina.png">
         <header>
             <div>
-                <img class="logo" src="img/CPA_Logo_UAM.png" />
+                <img class="logo" src="../img/CPA_Logo_UAM.png" />
             </div>
 
         </header>
         <div class="pergunta">
             <form action="paginaPergunta2_resp.php" method="post">
-                <h2 id="pergunta0" class="pergunta">Sua experiência de aprendizagem nas aulas remotas (ao vivo)</h2>
+                <h2 id="pergunta0" class="pergunta">Pergunta 1</h2>
                 <div class="estrelas">
                     <input type="radio" id="cm_star-empty" name="fb" value="" />
                     <label for="cm_star-1"><i class="fa"></i></label>
@@ -60,7 +60,7 @@ $saida = $banco->exibirPergunta();
                     </div>
                 </div>
 
-                <h2 id="pergunta1" class="pergunta">Desempenho geral do professor</h2>
+                <h2 id="pergunta1" class="pergunta">Pergunta 2</h2>
                 <div id = "divP2" class="estrelas">
                     <input type="radio" id="cm_star-empty" name="fb2" value=""/>
                     <label for="cm_star-6"><i class="fa"></i></label>
@@ -84,7 +84,7 @@ $saida = $banco->exibirPergunta();
                     </div>
                 </div>
 
-                <h2 id="pergunta2" class="pergunta">Desempenho geral do professor</h2>
+                <h2 id="pergunta2" class="pergunta">Pergunta 3</h2>
                 <div id = "divP3" class="estrelas">
                     <input type="radio" id="cm_star-empty" name="fb3" value=""/>
                     <label for="cm_star-11"><i class="fa"></i></label>
@@ -108,7 +108,7 @@ $saida = $banco->exibirPergunta();
                     </div>
                 </div>
 
-                <h2 id="pergunta3" class="pergunta">Desempenho geral do professor</h2>
+                <h2 id="pergunta3" class="pergunta">Pergunta 4</h2>
                 <div id = "divP4" class="estrelas">
                     <input type="radio" id="cm_star-empty" name="fb4" value=""/>
                     <label for="cm_star-16"><i class="fa"></i></label>
@@ -132,7 +132,7 @@ $saida = $banco->exibirPergunta();
                     </div>
                 </div>
 
-                <h2 id="pergunta4" class="pergunta">Desempenho geral do professor</h2>
+                <h2 id="pergunta4" class="pergunta">Pergunta 5</h2>
                 <div id = "divP5" class="estrelas">
                     <input type="radio" id="cm_star-empty" name="fb5" value=""/>
                     <label for="cm_star-21"><i class="fa"></i></label>
