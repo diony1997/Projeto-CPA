@@ -22,12 +22,13 @@ and open the template in the editor.
                 <img class="logo" src="img/CPA_Logo_UAM.png" />
             </div>
         </header>
-        
+
         <div class="fim">
-            
+
             <h2 class="fim">Fim</h2>
             <h2 class="fim">Agradecemos a participação!</h2>
-            
+            <br>
+
         </div>
     </body>
 </html>

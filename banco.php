@@ -110,7 +110,6 @@ class Banco {
             die("Falha no comando SQL: Inserção de Pergunta");
         }
         $stmt->execute();
-        echo 'Pergunta Inserida';
     }
 
     //busca todas perguntas disponiveis no curso
@@ -306,7 +305,7 @@ class Banco {
     }
 
     function criarTabela() {
-        $tabela = '<table id="Relatorio" border="1">'; //abre table
+        $tabela = '<table id="Relatorio" border="1" width="100%" style="background-color: white;" >'; //abre table
         $tabela .= '<thead>'; //abre cabeçalho
         $tabela .= '<tr>'; //abre uma linha
         $tabela .= '<th>Curso</th>'; // colunas do cabeçalho

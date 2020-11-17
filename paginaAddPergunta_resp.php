@@ -1,10 +1,9 @@
 <?php
-
 session_start();
 /*
-if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
-    header('Location: loginUser.php');
-}
+  if (empty($_SESSION['user']) and empty($_SESSION['senha'])) {
+  header('Location: loginUser.php');
+  }
  * 
  */
 require_once 'banco.php';
@@ -26,19 +25,14 @@ $banco->inserirPergunta($curso, $conteudo, $disciplina, $professor, $tipo, $data
     <head>
         <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" media="(max-width: 900px)" href="css/estilo2.css">
-        <link rel="stylesheet" media="(min-width: 900px)" href="css/estilo2.css">
         <script src="lib/jquery/jquery.min.js"></script>
         <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-
         <meta charset = "UTF-8">
-
         <title>Pergunta Inserida</title>
-        
     </head>
 
-    <body background = "img/fundoPagina.png" alt = "">
+    <body background="img/fundoPagina.png">        
         <header>
             <div class="wrapper">
                 <img class = "cpa" src="img/CPA_Logo_UAM.png"/>

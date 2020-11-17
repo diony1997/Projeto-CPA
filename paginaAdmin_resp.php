@@ -5,6 +5,7 @@ header('Content-Type: text/html; charset=UTF-8');
 require_once './banco_preencher.php';
 
 $banco = new Banco_preencher();
+$flag = 0;
 
 if (isset($_FILES['file']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
     $caminho = $_FILES['file']['tmp_name'];
@@ -36,12 +37,44 @@ if (isset($_FILES['file']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
         }
         $cont++;
     }
-    echo "Dados Inseridos";
-
-} else {
-    echo 'Erro no envio do arquivo';
+    $flag = 1;
 }
 
 ?>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" media="(max-width: 900px)" href="css/estilo2.css">
+        <script src="lib/jquery/jquery.min.js"></script>
+        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+        <meta charset = "UTF-8">
+        <title>Atualização do Banco</title>
+    </head>
+
+    <body background="img/fundoPagina.png">        
+        <header>
+            <div class="wrapper">
+                <img class = "cpa" src="img/CPA_Logo_UAM.png"/>
+                <div class="caption">
+                    <?php   if($flag == 1){
+                                echo "<h1>Arquivo Encontrado</h1>";
+                                echo "<p>Os novos dados foram inseridos ao banco</p>";
+                            } else {
+                                echo "<h1>Arquivo Não Encontrado</h1>";
+                                echo "<p>Verifique o arquivo selecionado</p>";
+                            } 
+                    ?>
+                    
+                    <br/><br/>
+                    <form action="paginaAdmin.php">
+                        <button type="submit" class="btn btn-success">VOLTAR AO INÍCIO</button></p>
+                    </form>
+                </div>
+            </div>
+        </header>
+    </body>
+</html>
 
 

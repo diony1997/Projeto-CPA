@@ -1,8 +1,8 @@
 @media (min-width: 500px) and (max-width: 900px)
 {
     body{
-    background:white;
-    background-position: relative;
+        background:white;
+        background-position: relative;
     }
 }
 
@@ -47,4 +47,5 @@
         font-size: 20px;
     }
 
+    
 }
