@@ -13,5 +13,5 @@ O sistema está dividido em duas partes:
 
 ### Banco de Dados
 
--- O banco utilizado esta disponível dentro da pasta Banco Modelo, possui uma representação visual e o arquivo sql.
--- Também está inserido um modelo para o arquivo .csv que é utilizado para preencher o banco.
+- O banco utilizado esta disponível dentro da pasta Banco Modelo, possui uma representação visual e o arquivo sql.
+- Também está inserido um modelo para o arquivo .csv que é utilizado para preencher o banco.
