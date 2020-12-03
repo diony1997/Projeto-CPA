@@ -12,7 +12,7 @@
 
         <meta charset = "UTF-8">
 
-        <title>Projeto CPA</title>
+        <title>Pesquisa CPA</title>
     </head>
 
     <body>
